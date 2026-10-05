@@ -91,12 +91,12 @@ with st.sidebar:
   st.divider()
 
   st.markdown(
-      '<div class="sidebar-header">📉 Performance Metrics</div>',
+      '<div class="sidebar-header">📉 Model Loss</div>',
       unsafe_allow_html=True,
   )
   col_a, col_b = st.columns(2)
-  col_a.metric("Baseline MAE", "0.7505")
-  col_b.metric("Model MAE", "0.7183", delta="-4.3%")
+  col_a.metric("Baseline Loss", "0.7505")
+  col_b.metric("Model Loss", "0.7183", delta="-4.3%")
 
   st.divider()
 
