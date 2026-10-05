@@ -7,134 +7,135 @@ st.set_page_config(
     page_title="Batman Movie Rating Predictor",
     page_icon="🦇",
     layout="centered",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
-# Custom Relaxing & Modern Visual Styling (Soft Violet / Lavender Palette)
+# Dark Gotham & Gold Custom Styling
 st.markdown(
     """
     <style>
-    /* Main Background & Fonts */
+    /* Main Dark Theme Background */
     .stApp {
-        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: #0b0e14;
+        color: #e2e8f0;
+        font-family: 'Inter', -apple-system, sans-serif;
     }
     
-    /* Title Styling */
+    /* Header Styling */
     .main-title {
-        color: #2d3748;
-        font-weight: 800;
-        font-size: 2.3rem;
-        margin-bottom: 0.2rem;
+        color: #f6ad55;
+        font-weight: 900;
+        font-size: 2.5rem;
         text-align: center;
+        letter-spacing: -0.5px;
+        margin-top: 10px;
     }
     .sub-title {
-        color: #5a67d8;
-        font-weight: 600;
-        font-size: 1.1rem;
+        color: #cbd5e0;
+        font-weight: 500;
+        font-size: 1.05rem;
         text-align: center;
         margin-bottom: 2rem;
     }
 
-    /* Cards & Containers */
-    .custom-card {
-        background-color: #ffffff;
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        margin-bottom: 24px;
-        border: 1px solid #e2e8f0;
+    /* Dark Gotham Cards */
+    .gotham-card {
+        background-color: #171923;
+        border-radius: 14px;
+        padding: 22px;
+        border: 1px solid #2d3748;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        margin-bottom: 20px;
     }
-    .custom-card-header {
-        color: #4c51bf;
-        font-size: 1.25rem;
+    .gotham-header {
+        color: #f6ad55;
+        font-size: 1.2rem;
         font-weight: 700;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    /* Metric Box Customization */
+    /* Metrics Styling */
     [data-testid="stMetric"] {
-        background-color: #f7fafc;
+        background-color: #1a202c !important;
         border-radius: 12px;
         padding: 16px;
-        border: 1px solid #edf2f7;
+        border: 1px solid #2d3748;
     }
     [data-testid="stMetricLabel"] {
-        color: #718096 !important;
-        font-size: 0.9rem !important;
+        color: #a0aec0 !important;
+        font-size: 0.85rem !important;
         font-weight: 600 !important;
     }
     [data-testid="stMetricValue"] {
-        color: #2b6cb0 !important;
-        font-weight: 700 !important;
+        color: #f6ad55 !important;
+        font-weight: 800 !important;
     }
 
-    /* Target Result Display */
-    .result-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: #ffffff;
+    /* Prediction Result Banner */
+    .result-banner {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        border: 2px solid #f6ad55;
         border-radius: 16px;
-        padding: 28px;
+        padding: 24px;
         text-align: center;
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 0 20px rgba(246, 173, 85, 0.15);
         margin-top: 20px;
     }
     .result-score {
-        font-size: 3rem;
-        font-weight: 800;
-        margin: 10px 0;
-        letter-spacing: -1px;
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #f6ad55;
+        margin: 8px 0;
     }
     
-    /* Footer Note */
-    .footer-note {
-        color: #a0aec0;
-        font-size: 0.85rem;
+    /* Footer */
+    .footer-text {
+        color: #718096;
+        font-size: 0.8rem;
         text-align: center;
-        margin-top: 30px;
+        margin-top: 35px;
     }
     </style>
 """,
     unsafe_allow_html=True,
 )
 
-# 1. Header Section
+# Title & Subtitle
 st.markdown(
-    '<div class="main-title">🦇 Batman Movie Rating Predictor</div>',
+    '<div class="main-title">🦇 Batman Rating Predictor</div>',
     unsafe_allow_html=True,
 )
 st.markdown(
-    '<div class="sub-title">Interactive Linear Regression Machine Learning'
-    " Project</div>",
+    '<div class="sub-title">Linear Regression Model trained on Kaggle Batman'
+    " Film Data</div>",
     unsafe_allow_html=True,
 )
 
+# Overview Section
 st.markdown(
     """
-<div class="custom-card">
-    <div class="custom-card-header">🎯 Project Overview</div>
-    Welcome to the interactive predictive application! This project demonstrates an end-to-end Machine Learning pipeline using a dataset of Batman movies from Kaggle.<br><br>
-    <ul>
-        <li><b>Target Variable ($y$):</b> Audience score on IMDb (<code>Imdb Rating</code>)</li>
-        <li><b>Feature Predictor ($X$):</b> Release year of the movie (<code>Year</code>)</li>
-    </ul>
+<div class="gotham-card">
+    <div class="gotham-header">🎯 Project Scope</div>
+    An end-to-end Machine Learning web app predicting movie performance using simple Linear Regression.
+    <br><br>
+    • <b>Target Variable ($y$):</b> IMDb Audience Score (<code>Imdb Rating</code>)<br>
+    • <b>Predictor Feature ($X$):</b> Release Year (<code>Year</code>)
 </div>
 """,
     unsafe_allow_html=True,
 )
 
-# 2. Model Training & Evaluation Section
+# Process Section
 st.markdown(
     """
-<div class="custom-card">
-    <div class="custom-card-header">📚 Training Process & Loss Performance</div>
-    The model was trained in a Jupyter research notebook (Colab) following these core steps:
-    <ol>
-        <li><b>Data Ingestion:</b> Loaded the Batman film dataset from Kaggle and handled missing values.</li>
-        <li><b>Feature Extraction:</b> Extracted <code>Year</code> ($X$) and <code>IMDb Rating</code> ($y$) as NumPy numerical vectors.</li>
-        <li><b>Baseline Model:</b> Calculated constant mean predictions to set an initial baseline loss benchmark.</li>
-        <li><b>Linear Regression:</b> Fitted the optimal linear equation $y = w \cdot X + b$ using <code>scikit-learn</code> to minimize error.</li>
-    </ol>
+<div class="gotham-card">
+    <div class="gotham-header">⚙️ Training Methodology</div>
+    1. <b>Data Pipeline:</b> Downloaded and cleaned Batman film records from Kaggle.<br>
+    2. <b>Baseline Benchmark:</b> Computed mean target value to set initial MAE loss.<br>
+    3. <b>Model Fitting:</b> Derived $y = w \\cdot X + b$ parameters using <code>scikit-learn</code>.
 </div>
 """,
     unsafe_allow_html=True,
@@ -144,69 +145,63 @@ st.markdown(
 col1, col2 = st.columns(2)
 with col1:
   st.metric(
-      label="📉 Baseline Loss (MAE)",
+      label="📉 BASELINE MAE",
       value="0.7505",
-      help="Average error when predicting solely using the target mean score.",
+      help="Mean baseline error predicting the average rating.",
   )
 
 with col2:
   st.metric(
-      label="🚀 Model Loss (MAE)",
+      label="🚀 MODEL MAE",
       value="0.7183",
-      delta="-4.3% Error Reduction",
+      delta="-4.3% Error",
       delta_color="normal",
-      help="Average error achieved by the trained Linear Regression model.",
+      help="Trained linear regression mean absolute error.",
   )
 
-# Mathematical Equation Summary
+# Model Formula Box
 st.info("""
-**Linear Regression Equation:**
+**Learned Model Equation:**
 $$\\text{IMDb Rating} = 0.0226 \\times \\text{Year} - 38.1322$$
 
-* **Slope ($w \\approx 0.0226$):** On average, each passing year is associated with a 0.0226 increase in IMDb rating (showing a slight upward rating trend over time).
-* **Intercept ($b \\approx -38.1322$):** The theoretical y-intercept offset of the linear model.
+* **Slope ($w \\approx 0.0226$):** Each year adds roughly $+0.0226$ rating points on average.
+* **Intercept ($b \\approx -38.1322$):** Mathematical constant offset.
 """)
 
 st.divider()
 
-# 3. Interactive Prediction Section
-st.subheader("🎯 Live Interactive Simulator")
-st.write(
-    "Select or type any movie release year below to generate a real-time"
-    " prediction from the trained model:"
-)
+# Interactive Predictor Section
+st.markdown("### 🎯 Predict a Film's Rating")
 
-# User Input Widget
 year_input = st.number_input(
-    "Select Release Year (Year):",
+    "Enter Movie Release Year:",
     min_value=1930,
     max_value=2050,
     value=2024,
     step=1,
 )
 
-# Learned Weights from Training
+# Weights
 w = 0.02262446
 b = -38.13222304
 
-# Calculate Linear Regression Prediction
+# Compute prediction
 predicted_rating = w * year_input + b
 clamped_rating = min(max(predicted_rating, 1.0), 10.0)
 
-# Beautiful Score Card Output
+# Display Result Card
 st.markdown(
     f"""
-<div class="result-card">
-    <div style="font-size: 1.1rem; opacity: 0.9;">Predicted IMDb Rating for {year_input}</div>
-    <div class="result-score">{clamped_rating:.2f} <span style="font-size: 1.5rem; opacity: 0.8;">/ 10</span></div>
-    <div style="font-size: 0.85rem; opacity: 0.85;">Calculated via $y = 0.0226 \\times {year_input} - 38.1322$</div>
+<div class="result-banner">
+    <div style="font-size: 1.1rem; color: #e2e8f0;">Predicted IMDb Score ({year_input})</div>
+    <div class="result-score">{clamped_rating:.2f} <span style="font-size: 1.5rem; color: #a0aec0;">/ 10</span></div>
+    <div style="font-size: 0.85rem; color: #a0aec0;">Formula: $y = 0.0226 \\times {year_input} - 38.1322$</div>
 </div>
 """,
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    '<div class="footer-note">Built with Python, Scikit-Learn, and Streamlit'
-    " 🦇</div>",
+    '<div class="footer-text">Streamlit • Scikit-Learn • GitHub Deployment</div>',
     unsafe_allow_html=True,
 )
