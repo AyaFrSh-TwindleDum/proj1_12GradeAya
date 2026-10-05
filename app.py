@@ -47,6 +47,7 @@ st.markdown(
         text-align: center;
         box-shadow: 0 0 25px rgba(246, 173, 85, 0.2);
         margin-top: 25px;
+        margin-bottom: 30px;
     }
     .result-score {
         font-size: 4.5rem;
@@ -55,6 +56,21 @@ st.markdown(
         margin: 12px 0;
     }
     
+    /* Explanation Box Styling */
+    .explanation-card {
+        background-color: #171923;
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid #2d3748;
+        margin-top: 20px;
+    }
+    .explanation-title {
+        color: #f6ad55;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
     /* Sidebar Styling */
     [data-testid="stSidebar"] {
         background-color: #11141d !important;
@@ -81,7 +97,7 @@ st.markdown(
 )
 
 # ==========================================
-# SIDEBAR: Project Context & Model Details
+# SIDEBAR: Project Context & Metrics
 # ==========================================
 with st.sidebar:
   st.title("🦇 Project Info")
@@ -91,18 +107,6 @@ with st.sidebar:
     This app uses a **Linear Regression** model trained on Batman film data from Kaggle.
     * **Target ($y$):** IMDb Rating
     * **Feature ($X$):** Release Year
-    """)
-
-  st.divider()
-
-  st.markdown(
-      '<div class="sidebar-header">⚙️ Training Steps</div>',
-      unsafe_allow_html=True,
-  )
-  st.markdown("""
-    1. Data ingestion & cleaning
-    2. Baseline MAE computation
-    3. Model fitting ($y = w \\cdot X + b$) via `scikit-learn`
     """)
 
   st.divider()
@@ -121,11 +125,10 @@ with st.sidebar:
       '<div class="sidebar-header">📐 Equation</div>', unsafe_allow_html=True
   )
   st.latex(r"\text{IMDb} = 0.0226 \cdot \text{Year} - 38.1322")
-  st.caption("Each passing year adds ~0.0226 points on average.")
 
 
 # ==========================================
-# MAIN PAGE: Focus on Prediction
+# MAIN PAGE: Predictor & Explanations
 # ==========================================
 st.markdown(
     '<div class="main-title">🦇 Batman Movie Rating Predictor</div>',
@@ -164,6 +167,27 @@ with center_col:
         <div style="font-size: 1.2rem; color: #e2e8f0; font-weight: 600;">Predicted IMDb Score for {year_input}</div>
         <div class="result-score">{clamped_rating:.2f} <span style="font-size: 2rem; color: #a0aec0;">/ 10</span></div>
         <div style="font-size: 0.9rem; color: #a0aec0;">Computed live via $y = 0.0226 \\times {year_input} - 38.1322$</div>
+    </div>
+    """,
+      unsafe_allow_html=True,
+  )
+
+  # Breakdown Explanations
+  st.markdown(
+      """
+    <div class="explanation-card">
+        <div class="explanation-title">📊 Understanding the Performance Ratings</div>
+        <b>Mean Absolute Error (MAE):</b> Measures how far off the predictions are on average from actual IMDb ratings.<br><br>
+        • <b>Baseline Loss (0.7505):</b> The error when making a naive guess using only the average rating of all Batman movies.<br>
+        • <b>Model Loss (0.7183):</b> The error achieved when using the release year feature ($X$).<br>
+        • <b>Improvement (-4.3%):</b> The Linear Regression model reduced prediction error by 4.3% compared to the baseline.
+    </div>
+
+    <div class="explanation-card">
+        <div class="explanation-title">🧮 Understanding the Equation</div>
+        The model fits a straight line equation: <b>$\text{IMDb Rating} = (w \cdot \text{Year}) + b$</b><br><br>
+        • <b>Slope ($w \approx 0.0226$):</b> For every additional year, the predicted IMDb rating increases by ~0.0226 points. This reflects a slight upward trend in Batman film ratings over time.<br>
+        • <b>Intercept ($b \approx -38.1322$):</b> The mathematical starting constant needed to align the linear equation across modern years.
     </div>
     """,
       unsafe_allow_html=True,
