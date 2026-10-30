@@ -311,4 +311,4 @@ with tab2:
             st.session_state.current_round += 1
             st.button("לסיבוב הבא ➡️")
 
-st.markdown('<div class="footer-text">דבאח דניאל • פרויקט 2 - למידת מכונה</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer-text">פרידמן איה • פרויקט 2 - למידת מכונה</div>', unsafe_allow_html=True)
