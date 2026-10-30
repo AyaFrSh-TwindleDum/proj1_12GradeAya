@@ -10,13 +10,13 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom Styling (Dark Theme)
+# Custom Styling (High Contrast Dark Theme)
 st.markdown(
     """
     <style>
     .stApp {
         background-color: #0b0e14;
-        color: #e2e8f0;
+        color: #ffffff;
         font-family: 'Inter', -apple-system, sans-serif;
     }
     
@@ -29,9 +29,9 @@ st.markdown(
         margin-top: 10px;
     }
     .sub-title {
-        color: #a0aec0;
-        font-weight: 500;
-        font-size: 1.05rem;
+        color: #e2e8f0;
+        font-weight: 600;
+        font-size: 1.1rem;
         text-align: center;
         margin-bottom: 2rem;
     }
@@ -42,7 +42,7 @@ st.markdown(
         border-radius: 16px;
         padding: 25px;
         text-align: center;
-        box-shadow: 0 0 20px rgba(246, 173, 85, 0.15);
+        box-shadow: 0 0 20px rgba(246, 173, 85, 0.25);
         margin-top: 15px;
     }
     .result-score {
@@ -54,27 +54,34 @@ st.markdown(
     
     .game-card {
         background-color: #151923;
-        border: 1px solid #2d3748;
+        border: 1px solid #4a5568;
         border-radius: 12px;
         padding: 20px;
         margin-bottom: 15px;
+        color: #ffffff;
     }
     
     [data-testid="stSidebar"] {
         background-color: #11141d !important;
-        border-right: 1px solid #2d3748;
+        border-right: 1px solid #4a5568;
     }
     .sidebar-header {
         color: #f6ad55;
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         font-weight: 700;
         margin-top: 15px;
         margin-bottom: 10px;
     }
     
+    /* Ensuring all sidebar text and body text is bright and readable */
+    p, span, label, div {
+        color: #edf2f7;
+    }
+
     .footer-text {
-        color: #718096;
-        font-size: 0.85rem;
+        color: #cbd5e0;
+        font-size: 0.9rem;
+        font-weight: 500;
         text-align: center;
         margin-top: 40px;
     }
@@ -114,10 +121,10 @@ with st.sidebar:
     st.title("🦇 פרויקט 2: רגרסיה בשני מאפיינים")
 
     st.markdown('<div class="sidebar-header">🎯 סקירת המודל</div>', unsafe_allow_html=True)
-    st.write("""
-    **יעד ($y$):** ציון IMDb  
-    **מאפיין 1 ($x_1$):** שנת יציאה  
-    **מאפיין 2 ($x_2$):** אורך הסרט (בדקות)
+    st.markdown("""
+    * **יעד ($y$):** ציון IMDb  
+    * **מאפיין 1 ($x_1$):** שנת יציאה  
+    * **מאפיין 2 ($x_2$):** אורך הסרט (בדקות)
     """)
 
     st.divider()
@@ -128,7 +135,7 @@ with st.sidebar:
     col2.metric("1 Feature", "0.718")
     col3.metric("2 Features", "0.584", delta="-18.6%")
 
-    st.caption("**מסקנה:** הוספת אורך הסרט ($x_2$) שיפרה את דיוק המודל והורידה את ה-MSE באופן משמעותי.")
+    st.markdown("<p style='color: #63b3ed; font-size: 0.9rem; margin-top: 8px;'><b>מסקנה:</b> הוספת אורך הסרט ($x_2$) שיפרה את דיוק המודל והורידה את ה-MSE באופן משמעותי.</p>", unsafe_allow_html=True)
 
     st.divider()
 
@@ -170,9 +177,9 @@ with tab1:
         st.markdown(
             f"""
             <div class="result-banner">
-                <div style="font-size: 1.1rem; color: #e2e8f0; font-weight: 600;">ציון IMDb מנובא עבור סרט מ-{year_input} באורך {runtime_input} דקות</div>
-                <div class="result-score">{predicted_val:.2f} <span style="font-size: 1.8rem; color: #a0aec0;">/ 10</span></div>
-                <div style="font-size: 0.85rem; color: #a0aec0;">חישוב: $y = 0.0185 \\cdot {year_input} + 0.0142 \\cdot {runtime_input} - 31.854$</div>
+                <div style="font-size: 1.2rem; color: #ffffff; font-weight: 700;">ציון IMDb מנובא עבור סרט מ-{year_input} באורך {runtime_input} דקות</div>
+                <div class="result-score">{predicted_val:.2f} <span style="font-size: 2rem; color: #cbd5e0;">/ 10</span></div>
+                <div style="font-size: 0.95rem; color: #63b3ed; font-weight: 500;">חישוב: $y = 0.0185 \\cdot {year_input} + 0.0142 \\cdot {runtime_input} - 31.854$</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -205,14 +212,19 @@ with tab2:
     # SCREEN 1: Welcome & Rules
     if not st.session_state.game_started:
         st.markdown("<h3 style='text-align: center; color: #f6ad55;'>🎮 נצח את המודל (Beat the Model)</h3>", unsafe_allow_html=True)
-        st.write("""
-        ### חוקי המשחק:
-        1. המשחק כולל **5 סיבובים**, ובכל סיבוב תוצג דוגמה של סרט באטמן אמיתי מהדאטה-סט.
-        2. המשימה שלך היא לנחש את ציון ה-IMDb האמיתי של הסרט על סמך השנה ואורך הסרט.
-        3. המודל ייתן חיזוי משלו במקביל!
-        4. **שיטת הניקוד:** מי שהערך שלו קרוב יותר לציון האמיתי יקבל **100 נקודות** בסיבוב. במקרה של שוויון בדיוק, שניכם תזכו בנקודות!
-        """)
+        st.markdown("""
+        <div style="background-color: #151923; padding: 20px; border-radius: 12px; border: 1px solid #4a5568;">
+        <h4 style="color: #f6ad55;">חוקי המשחק:</h4>
+        <ol style="color: #ffffff; font-size: 1rem; line-height: 1.8;">
+            <li>המשחק כולל <b>5 סיבובים</b>, ובכל סיבוב תוצג דוגמה של סרט באטמן אמיתי מהדאטה-סט.</li>
+            <li>המשימה שלך היא לנחש את ציון ה-IMDb האמיתי של הסרט על סמך השנה ואורך הסרט.</li>
+            <li>המודל ייתן חיזוי משלו במקביל!</li>
+            <li><b>שיטת הניקוד:</b> מי שהערך שלו קרוב יותר לציון האמיתי יקבל <b>100 נקודות</b> בסיבוב. במקרה של שוויון, שניכם תזכו בנקודות!</li>
+        </ol>
+        </div>
+        """, unsafe_allow_html=True)
         
+        st.write("")
         st.button("🚀 התחל משחק חדש", on_click=start_new_game, use_container_width=True, type="primary")
 
     # SCREEN 2: End Game Summary
@@ -241,7 +253,7 @@ with tab2:
     else:
         movie = DATASET[st.session_state.current_round]
         
-        st.markdown(f"### סיבוב {st.session_state.current_round + 1} מתוך 5")
+        st.markdown(f"<h3 style='color: #f6ad55;'>סיבוב {st.session_state.current_round + 1} מתוך 5</h3>", unsafe_allow_html=True)
         
         # Display Progress Bar
         st.progress((st.session_state.current_round) / 5)
@@ -253,9 +265,9 @@ with tab2:
 
         st.markdown(f"""
         <div class="game-card">
-            <h2>🎬 הסרט: {movie['title']}</h2>
-            <p>📅 <b>שנת יציאה:</b> {movie['year']}</p>
-            <p>⏱️ <b>אורך הסרט:</b> {movie['runtime']} דקות</p>
+            <h2 style="color: #f6ad55; margin-top: 0;">🎬 הסרט: {movie['title']}</h2>
+            <p style="font-size: 1.1rem; color: #ffffff;">📅 <b>שנת יציאה:</b> {movie['year']}</p>
+            <p style="font-size: 1.1rem; color: #ffffff;">⏱️ <b>אורך הסרט:</b> {movie['runtime']} דקות</p>
         </div>
         """, unsafe_allow_html=True)
 
