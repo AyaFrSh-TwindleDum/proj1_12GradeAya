@@ -94,9 +94,9 @@ st.markdown(
 # MODEL PARAMETERS & CONSTANTS
 # ==========================================
 # y = w1*x1 (Year) + w2*x2 (Runtime) + b
-W1 = 0.0185      # Weight for Release Year
-W2 = 0.0142      # Weight for Runtime (Minutes)
-B = -31.8540     # Bias term
+W1 = 0.021963841043585144      # Weight for Release Year
+W2 = -0.00156292855840709      # Weight for Runtime (Minutes)
+B = -36.673574832334005     # Bias term
 
 # Dataset of real Batman movies for the game
 DATASET = [
